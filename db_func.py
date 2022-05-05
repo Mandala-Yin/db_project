@@ -66,24 +66,30 @@ def fetch_basic_information(u_id, u_role):
     db = get_db_connection()
     cur = db.cursor()
     if u_role == 'admin':
-        cur.execute(f'SELECT id, name, sex, fname, telephone, address, working_year, is_cadre FROM "admin_information" WHERE "admin_information".id=\'{u_id}\'')
+        cur.execute(f'SELECT id, name, sex, fname, telephone, address, working_year, is_cadre '
+                    f'FROM "admin_information" '
+                    f'WHERE "admin_information".id=\'{u_id}\'')
         raw_res = cur.fetchone()
         close_db_connection(cur, db)
         return format_trans_one(raw_res, default_map+adm_extra)
     elif u_role == 'teacher':
-        cur.execute(f'SELECT id, name, sex, fname, telephone, address, working_year, title FROM "teacher_information" WHERE "teacher_information".id=\'{u_id}\'')
+        cur.execute(f'SELECT id, name, sex, fname, telephone, address, working_year, title '
+                    f'FROM "teacher_information" '
+                    f'WHERE "teacher_information".id=\'{u_id}\'')
         raw_res = cur.fetchone()
         close_db_connection(cur, db)
         return format_trans_one(raw_res, default_map + tea_extra)
     else:
-        cur.execute(f'SELECT id, name, sex, fname, telephone, address, grade, is_foreign_stu FROM "student_information" WHERE "student_information".id=\'{u_id}\'')
+        cur.execute(f'SELECT id, name, sex, fname, telephone, address, grade, is_foreign_stu '
+                    f'FROM "student_information" '
+                    f'WHERE "student_information".id=\'{u_id}\'')
         raw_res = cur.fetchone()
         close_db_connection(cur, db)
         return format_trans_one(raw_res, default_map + stu_extra)
 
 
 def update_user_info(_id, _telephone, _address):
-    sql = 'UPDATE "Users" SET telephone=\'{}\', address=\'{}\' WHERE id=\'{}\''.format(_telephone, _address, _id)
+    sql = f'UPDATE "Users" SET telephone=\'{_telephone}\', address=\'{_address}\' WHERE id=\'{_id}\''
     db = get_db_connection()
     cur = db.cursor()
     cur.execute(sql)
@@ -93,7 +99,11 @@ def update_user_info(_id, _telephone, _address):
 
 def fetch_stu_course(sid, is_major=True):
     # 为了便于操作，建立了学生-选课视图，每次查询会重建视图
-    sql = f'CREATE OR REPLACE VIEW student_course AS SELECT "SC".cid, "SC".score, "SC".is_w, "SC".semester, "Course".cname, "Course".category, "Course".credit FROM "SC", "Course" WHERE "SC".sid = \'{sid}\' and "SC".is_major={is_major} and "SC".cid = "Course".cid and "SC".tid = "Course".tid'
+    sql = f'CREATE OR REPLACE VIEW student_course AS ' \
+          f'SELECT "SC".cid, "SC".score, "SC".is_w, "SC".semester, "Course".cname, "Course".category, "Course".credit ' \
+          f'FROM "SC", "Course" ' \
+          f'WHERE "SC".sid = \'{sid}\' and "SC".is_major={is_major} ' \
+          f'and "SC".cid = "Course".cid and "SC".tid = "Course".tid'
     db = get_db_connection()
     cur = db.cursor()
     cur.execute(sql)
