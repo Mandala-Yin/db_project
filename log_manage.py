@@ -1,4 +1,4 @@
-from flask import Blueprint, request, redirect, render_template, session, url_for
+from flask import Blueprint, request, redirect, render_template, session, url_for, flash
 from db_func import login_check
 
 bp = Blueprint('log_manage', __name__)
@@ -21,7 +21,8 @@ def login():
         else:
             return redirect(url_for('student.student', sid=user_id))
     else:
-        return render_template('login.html', msg='id or password wrong!')
+        flash("Please input correct id and password!")
+        return render_template('login.html')
 
 
 @bp.route('/logout')

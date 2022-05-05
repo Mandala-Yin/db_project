@@ -1,0 +1,1 @@
+CREATE INDEX SC_tid_index on "SC" (tid);

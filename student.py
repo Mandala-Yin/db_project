@@ -9,7 +9,7 @@ def student(sid):
     basic_info = fetch_basic_information(sid, 'student')
     if session.get('user_id') is not None:
         # 正常情况下，应该进入展示学生基本信息的页面student.html
-        return render_template('student.html', basic_info=basic_info)
+        return render_template('student.html')#, basic_info=basic_info)
     else:
         return redirect(url_for('log_manage.login'))
 
