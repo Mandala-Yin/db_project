@@ -1,5 +1,5 @@
 from datetime import timedelta
-from flask import Flask, redirect
+from flask import Flask, redirect, url_for
 import log_manage, student, teacher, admin
 
 app = Flask(__name__)
