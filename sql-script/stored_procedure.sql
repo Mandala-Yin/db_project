@@ -3,9 +3,10 @@ CREATE OR REPLACE PROCEDURE modify_users(
     IN tel character varying,
     IN addr character varying,
     IN id_ character varying)
-LANGUAGE 'sql'
-
-BEGIN ATOMIC
+LANGUAGE plpgsql
+AS $$
+BEGIN
  UPDATE "Users" SET telephone = modify_users.tel, address = modify_users.addr
    WHERE (("Users".id)::text = (modify_users.id_)::text);
 END;
+$$;

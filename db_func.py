@@ -95,7 +95,8 @@ def fetch_basic_information(u_id, u_role):
 
 # 更改用户信息
 def update_user_info(_id, _telephone, _address):
-    sql = f'UPDATE "Users" SET telephone=\'{_telephone}\', address=\'{_address}\' WHERE id=\'{_id}\''
+    # call stored_procedure: 'modify_users'
+    sql = f'CALL modify_users(\'{_telephone}\', \'{_address}\', \'{_id}\');'
     db = get_db_connection()
     cur = db.cursor()
     cur.execute(sql)
@@ -273,11 +274,3 @@ def update_course(cid, tid, cname, category, credit):
     cur.execute(sql)
     db.commit()
     close_db_connection(cur, db)
-
-
-'''
-if __name__ == '__main__':
-    conn = get_db_connection()
-    print(fetch_basic_information(conn, '200215', 'student'))
-    close_db_connection(conn)
-'''
