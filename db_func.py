@@ -123,7 +123,7 @@ def fetch_stu_course(sid, is_major=True):
     sql = f'SELECT category, SUM(credit), AVG(score)::float FROM student_course GROUP BY category'
     cur.execute(sql)
     results_category = format_trans(cur.fetchall(), category_info)
-    close_db_connection()
+    close_db_connection(cur, db)
 
     return results_full, results_category
 
