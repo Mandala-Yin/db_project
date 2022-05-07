@@ -13,7 +13,7 @@ TC_info = ['cid', 'cname', 'category', 'credit', 'semester', 'avg_score', 'max_s
 # 建立数据库连接
 def get_db_connection():
     db = psycopg2.connect(host='127.0.0.1',
-                          database='Information_Management_System',
+                          database='information_management_system',
                           user='postgres',
                           password='')
     return db

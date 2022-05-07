@@ -6,7 +6,7 @@
 ```
 psql
 
-create database information_management_system;
+create database Information_Management_System;
 \c information_management_system;
 
 \i sql-script/create.sql

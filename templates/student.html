@@ -1,10 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>student information display</title>
-</head>
-<body>
-Student: 沈思绮
-</body>
-</html>
+{% set title = 'Student' %}
+
+{% extends 'layouts/index_basic.html' %}
+
+{% block sidebar_menu_content %}
+<li class="sidebar-item active ">
+    <a href="student.html" class='sidebar-link'>
+        <i class="bi bi-grid-fill"></i>
+        <span>基本信息</span>
+    </a>
+</li>
+
+<li class="sidebar-item  ">
+    <a href="#" class='sidebar-link'>
+        <i class="bi bi-stack"></i>
+        <span>已修课程</span>
+    </a>
+</li>
+{% endblock %}
