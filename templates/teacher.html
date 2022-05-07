@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<!-- 
 <head>
     <meta charset="UTF-8">
     <title>teacher information display</title>
@@ -8,3 +9,24 @@
 teacher: 高军
 </body>
 </html>
+-->
+
+{% set title = 'Student' %}
+
+{% extends 'layouts/index_basic.html' %}
+
+{% block sidebar_menu_content %}
+<li class="sidebar-item active ">
+    <a href="student.html" class='sidebar-link'>
+        <i class="bi bi-grid-fill"></i>
+        <span>基本信息</span>
+    </a>
+</li>
+
+<li class="sidebar-item  ">
+    <a href="#" class='sidebar-link'>
+        <i class="bi bi-stack"></i>
+        <span>开设课程</span>
+    </a>
+</li>
+{% endblock %}
