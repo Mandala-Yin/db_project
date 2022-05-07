@@ -6,7 +6,7 @@ adm_extra = ['working_year', 'is_cadre']
 tea_extra = ['working_year', 'title']
 stu_extra = ['grade', 'is_foreign_stu']
 SC_info = ['cid', 'score', 'is_major', 'is_w', 'semester', 'cname', 'category', 'credit']
-category_info = ['category', 'credit', 'avg_score']
+category_info = ['category', 'credit', 'avg_score', 'avg_gpa']
 TC_info = ['cid', 'cname', 'category', 'credit', 'semester', 'avg_score', 'max_score']
 
 
@@ -95,7 +95,7 @@ def fetch_basic_information(u_id, u_role):
 
 # 更改用户信息
 def update_user_info(_id, _telephone, _address):
-    # call stored_procedure: 'modify_users'
+    # 调用存储过程: 'modify_users'
     sql = f'CALL modify_users(\'{_telephone}\', \'{_address}\', \'{_id}\');'
     db = get_db_connection()
     cur = db.cursor()
@@ -106,8 +106,10 @@ def update_user_info(_id, _telephone, _address):
 
 # 获取学生课程信息
 def fetch_stu_course(sid, is_major=True):
+    # 通过score计算gpa, 并保留两位小数
     sql = f'CREATE OR REPLACE VIEW student_course AS ' \
-          f'SELECT "SC".cid, "SC".score, "SC".is_w, "SC".semester, "Course".cname, "Course".category, "Course".credit ' \
+          f'SELECT "SC".cid, "SC".score, CAST((4-3*(100-"SC".score)^2/1600) as DECIMAL(3,2)) AS gpa, "SC".is_w, ' \
+          f'"SC".semester, "Course".cname, "Course".category, "Course".credit ' \
           f'FROM "SC", "Course" ' \
           f'WHERE "SC".sid = \'{sid}\' and "SC".is_major={is_major} ' \
           f'and "SC".cid = "Course".cid and "SC".tid = "Course".tid'
@@ -119,11 +121,13 @@ def fetch_stu_course(sid, is_major=True):
     cur.execute(sql)
     # results用于展示学生选课的所有信息(is_major的限制下，包括了退课的课)
     results_full = format_trans(cur.fetchall(), SC_info)
-    # 按类别统计学分, 平均成绩
-    sql = f'SELECT category, SUM(credit), AVG(score)::float FROM student_course GROUP BY category'
+    # 按类别统计学分, 平均成绩, 平均gpa, 保留两位小数
+    sql = f'SELECT category, SUM(credit) AS total_credits, CAST(AVG(score) as DECIMAL(5,2)) AS avg_scores, ' \
+          f'CAST((SUM(credit*gpa)/SUM(credit)) as DECIMAL(3,2)) AS avg_gpa ' \
+          f'FROM student_course GROUP BY category'
     cur.execute(sql)
     results_category = format_trans(cur.fetchall(), category_info)
-    close_db_connection()
+    close_db_connection(cur, db)
 
     return results_full, results_category
 
@@ -146,7 +150,7 @@ def fetch_tea_course(tid):
     return results
 
 
-# 获取不带score的信息（给定tid, cid, semester，返回sid, sname），用于提供给add_scores页面
+# 获取不带score的信息（给定tid, cid, semester，返回sid, s_name），用于提供给add_scores页面
 def fetch_course_without_score(cid, tid, semester):
     # 已经中期退课的学生成绩不由老师负责
     sql = f'SELECT "SC".sid, "student_information".name ' \
@@ -156,13 +160,13 @@ def fetch_course_without_score(cid, tid, semester):
     db = get_db_connection()
     cur = db.cursor()
     cur.execute(sql)
-    results = format_trans(cur.fetchall(), ['sid', 'sname'])
+    results = format_trans(cur.fetchall(), ['sid', 's_name'])
     close_db_connection(cur, db)
 
     return results
 
 
-# 获取带score的信息（给定tid, cid, semester，返回sid, sname, score），用于提供给modify_scores页面
+# 获取带score的信息（给定tid, cid, semester，返回sid, s_name, score），用于提供给modify_scores页面
 def fetch_course_with_score(cid, tid, semester):
     # 已经中期退课的学生成绩不由老师负责
     sql = f'SELECT "SC".sid, "student_information".name, "SC".score ' \
@@ -172,7 +176,7 @@ def fetch_course_with_score(cid, tid, semester):
     db = get_db_connection()
     cur = db.cursor()
     cur.execute(sql)
-    results = format_trans(cur.fetchall(), ['sid', 'sname', 'score'])
+    results = format_trans(cur.fetchall(), ['sid', 's_name', 'score'])
     close_db_connection(cur, db)
 
     return results

@@ -21,7 +21,7 @@ def login():
         else:
             return redirect(url_for('student.student', sid=user_id))
     else:
-        flash("Please input correct id and password!")
+        flash("Please input correct ID and password!")
         return render_template('login.html')
 
 

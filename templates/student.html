@@ -1,19 +1,74 @@
 {% set title = 'Student' %}
+{% set filename = 'student.html' %}
 
-{% extends 'layouts/index_basic.html' %}
+{% extends 'layouts/master.html' %}
 
-{% block sidebar_menu_content %}
-<li class="sidebar-item active ">
-    <a href="student.html" class='sidebar-link'>
-        <i class="bi bi-grid-fill"></i>
-        <span>基本信息</span>
-    </a>
-</li>
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='vendors/iconly/bold.css') }}">
+{% endblock %}
 
-<li class="sidebar-item  ">
-    <a href="#" class='sidebar-link'>
-        <i class="bi bi-stack"></i>
-        <span>已修课程</span>
-    </a>
-</li>
+{% block content %}
+<div>
+    <div class="page-heading" style="float: left;width: 90%;">
+        <h3>Hello! Student {{basic_info['name']}}!</h3>
+    </div>
+    <div class="page-heading" style="float: left; width: 10%;">
+        <button class="btn btn-primary btn-block"><a href="{{ url_for('log_manage.logout') }}" class="btn btn-primary btn-block">Logout</a></button>
+    </div>
+</div>
+<div class="page-content">
+    <div class="col-12  ">
+        <div class="row">
+            <div class="card">
+                <div class="card-header">
+                    <h4 style="float: left; width: 85%;">Basic Information</h4>
+                </div>
+                 <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="alert alert-light">
+                                <h4 class="alert-heading">ID</h4>
+                                <p>{{ basic_info['id'] }}</p>
+                            </div>
+                            <div class="alert alert-light">
+                                <h4 class="alert-heading">NAME</h4>
+                                <p>{{ basic_info['name'] }}</p>
+                            </div>
+                            <div class="alert alert-light">
+                                <h4 class="alert-heading">SEX</h4>
+                                <p>{{ basic_info['sex'] }}</p>
+                            </div>
+                            <div class="alert alert-light">
+                                <h4 class="alert-heading">FACULTY</h4>
+                                <p>{{ basic_info['faculty'] }}</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="alert alert-light">
+                                <h4 class="alert-heading">TELEPHONE</h4>
+                                <p>{{ basic_info['telephone'] }}</p>
+                            </div>
+                            <div class="alert alert-light">
+                                <h4 class="alert-heading">ADDRESS</h4>
+                                <p>{{ basic_info['address'] }}</p>
+                            </div>
+                            <div class="alert alert-light">
+                                <h4 class="alert-heading">GRADE</h4>
+                                <p>{{ basic_info['grade'] }}</p>
+                            </div>
+                            <div class="alert alert-light">
+                                <h4 class="alert-heading">IS_FOREIGN_STUDENT</h4>
+                                <p>{{ basic_info['is_foreign_stu'] }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block js %}
+<script src="{{ url_for('static', filename='vendors/apexcharts/apexcharts.js') }}"></script>
+<script src="{{ url_for('static', filename='js/pages/dashboard.js') }}"></script>
 {% endblock %}
