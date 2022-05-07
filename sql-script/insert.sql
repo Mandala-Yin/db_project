@@ -121,13 +121,9 @@ insert into "SC"(
     union
     select '200214', 'c01', '030123', 89, TRUE, TRUE, 202109101
     union
-    select '180215', 'c02', '130108', 82, FALSE, FALSE, 20210308
+    select '180215', 'c02', '030123', 82, FALSE, FALSE, 20210308
     union
-    select '180219', 'c02', '130108', 87, FALSE, FALSE, 20210308
-    union
-    select '200215', 'c02', '130108', NULL, TRUE, TRUE, 20210308
-    union
-    select '190217', 'c02', '130108', 91, TRUE, FALSE, 20210308
+    select '180219', 'c02', '030123', 87, FALSE, FALSE, 20210308
     union
     select '180215', 'c03', '190123', 95, TRUE, FALSE, 20200901
     union
@@ -140,4 +136,8 @@ insert into "SC"(
     select '210223', 'c04', '170134', 94, TRUE, FALSE, 20210221
     union
     select '190217', 'c04', '170134', 85, FALSE, FALSE, 20210221
+    union
+    select '200215', 'c05', '130108', NULL, TRUE, TRUE, 20210308
+    union
+    select '190217', 'c05', '130108', 91, TRUE, FALSE, 20210308
 );
