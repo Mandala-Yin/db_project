@@ -1,0 +1,36 @@
+<div class="sidebar-wrapper active">
+    <div class="sidebar-header">
+        <div class="d-flex justify-content-between">
+            <div class="toggler">
+                <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="sidebar-menu">
+        <ul class="menu">
+            <!-- 现在这里的文字和链接是硬编码的 -->
+            <li
+                class="sidebar-item {{ 'active' }}">
+                <a href="{{ url_for('student.student', sid=basic_info['id']) }}" class='sidebar-link'>
+                    <i class="bi bi-file-person"></i>
+                    <span>BASIC INFO</span>
+                </a>
+            </li>
+            <li
+                class="sidebar-item {{ 'active' }}">
+                <a href="{{ url_for('student.student_edit', sid=basic_info['id']) }}" class='sidebar-link'>
+                    <i class="bi bi-emoji-sunglasses"></i>
+                    <span>EDIT INFO</span>
+                </a>
+            </li>
+            <li
+                class="sidebar-item {{ 'active' }}">
+                <a href="{{ url_for('student.course_check', sid=basic_info['id']) }}" class='sidebar-link'>
+                    <i class="bi bi-emoji-smile"></i>
+                    <span>COURSE CHECK</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
+</div>
