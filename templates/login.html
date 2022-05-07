@@ -5,6 +5,13 @@
 <div class="row h-100">
     <div class="col-lg-5 col-12">
         <div id="auth-left">
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-danger"><i class="bi bi-file-excel"></i>{{ message }}</div>
+                        {% endfor %}
+                {% endif %}
+            {% endwith %}
             <h1 class="auth-title">Log in.</h1>
             <p class="auth-subtitle mb-5">Log in with your data that you entered during registration.</p>
 
@@ -22,7 +29,7 @@
                     </div>
                 </div>
                 <div class="form-group position-relative has-icon-left mb-4">
-                    <input type="text" name="role" list="type_list" class="form-control form-control-xl" placeholder="Select one Role">
+                    <input type="text" name="role" list="type_list" class="form-control form-control-xl" placeholder="Select One Role">
                         <datalist id="type_list">
 　　                          <option>admin</option>
 　　                          <option>teacher</option>
