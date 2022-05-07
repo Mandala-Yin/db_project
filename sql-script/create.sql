@@ -1,4 +1,12 @@
-CREATE TABLE IF NOT EXISTS "User"
+CREATE TABLE IF NOT EXISTS "Faculty"
+(
+    fid character varying(10)  NOT NULL,
+    fname character varying(20)  NOT NULL,
+    location character varying(10) ,
+    CONSTRAINT faculty_pk PRIMARY KEY (fid)
+);
+
+CREATE TABLE IF NOT EXISTS "Users"
 (
     id character varying(10) NOT NULL,
     password character varying(15) NOT NULL,
@@ -15,14 +23,6 @@ CREATE TABLE IF NOT EXISTS "User"
         ON UPDATE CASCADE
         ON DELETE CASCADE
         NOT VALID
-);
-
-CREATE TABLE IF NOT EXISTS "Faculty"
-(
-    fid character varying(10)  NOT NULL,
-    fname character varying(20)  NOT NULL,
-    location character varying(10) ,
-    CONSTRAINT faculty_pk PRIMARY KEY (fid)
 );
 
 CREATE TABLE IF NOT EXISTS "Teacher"
@@ -68,7 +68,6 @@ CREATE TABLE IF NOT EXISTS public."Course"
 (
     cid character varying(10) NOT NULL,
     tid character varying(10) NOT NULL,
-    uni_id character varying(10) NOT NULL,
     cname character varying(20) NOT NULL,
     category character varying(20) NOT NULL,
     credit integer NOT NULL,

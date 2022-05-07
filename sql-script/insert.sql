@@ -6,7 +6,7 @@ insert into "Faculty"(
     select 'f03', 'Society', 'S05'
 );
 
-insert into "User"(
+insert into "Users"(
     select '180005', 'abc123', 'adm', TRUE, '660782', 'A02-B117', 'f01', 'EECS', 'Alice'
     union 
     select '090005', 'abc123', 'adm', TRUE, '628734', 'A07-C01', 'f01', 'EECS', 'Tom'
@@ -49,37 +49,37 @@ insert into "User"(
 );
 
 insert into "Administrator"(
-    select '180005', 3
+    select '180005', 3, FALSE
     union
     select '090005', 12, TRUE
     union
-    select '170001', 4
+    select '170001', 4, FALSE
     union
     select '130000', 8, TRUE
 );
 
 insert into "Student"(
-    select '190277', 2019
+    select '190277', 2019, FALSE
     union
-    select '190231', 2019
+    select '190231', 2019, FALSE
     union
-    select '190217', 2019
+    select '190217', 2019, FALSE
     union
     select '200208', 2020, TRUE
     union
-    select '200214', 2020
+    select '200214', 2020, FALSE
     union
-    select '200215', 2020
+    select '200215', 2020, FALSE
     union
-    select '180215', 2018
+    select '180215', 2018, FALSE
     union
-    select '180217', 2018
+    select '180217', 2018, FALSE
     union
     select '180219', 2018, TRUE
     union
-    select '200266', 2020
+    select '200266', 2020, FALSE
     union
-    select '210223', 2021
+    select '210223', 2021, FALSE
 );
 
 insert into "Teacher"(
