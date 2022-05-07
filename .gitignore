@@ -1,3 +1,9 @@
 *.DS_Store
 /.idea
 */__pycache__
+
+refer
+debug
+help
+.vscode
+__pycache__
