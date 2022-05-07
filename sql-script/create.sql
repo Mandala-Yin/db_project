@@ -64,7 +64,7 @@ CREATE TABLE IF NOT EXISTS "Administrator"
         NOT VALID
 );
 
-CREATE TABLE IF NOT EXISTS "Course"
+CREATE TABLE IF NOT EXISTS public."Course"
 (
     cid character varying(10) NOT NULL,
     tid character varying(10) NOT NULL,
@@ -73,12 +73,12 @@ CREATE TABLE IF NOT EXISTS "Course"
     category character varying(20) NOT NULL,
     credit integer NOT NULL,
     CONSTRAINT "Course_pkey" PRIMARY KEY (cid, tid),
-    CONSTRAINT unique_course UNIQUE (uni_id),
     CONSTRAINT course_fk FOREIGN KEY (tid)
         REFERENCES "Teacher" (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE
 );
+
 
 CREATE TABLE IF NOT EXISTS "SC"
 (
