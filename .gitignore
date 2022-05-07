@@ -7,3 +7,5 @@ debug
 help
 .vscode
 __pycache__
+
+/__pycache__
