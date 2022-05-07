@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS "Users"
+CREATE TABLE IF NOT EXISTS "User"
 (
     id character varying(10) NOT NULL,
     password character varying(15) NOT NULL,
@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS "Users"
         ON UPDATE CASCADE
         ON DELETE CASCADE
         NOT VALID
-)
+);
 
 CREATE TABLE IF NOT EXISTS "Faculty"
 (
@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS "Faculty"
     fname character varying(20)  NOT NULL,
     location character varying(10) ,
     CONSTRAINT faculty_pk PRIMARY KEY (fid)
-)
+);
 
 CREATE TABLE IF NOT EXISTS "Teacher"
 (
@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS "Teacher"
         ON UPDATE CASCADE
         ON DELETE CASCADE
         NOT VALID
-)
+);
 
 CREATE TABLE IF NOT EXISTS "Student"
 (
@@ -49,7 +49,7 @@ CREATE TABLE IF NOT EXISTS "Student"
         ON UPDATE CASCADE
         ON DELETE CASCADE
         NOT VALID
-)
+);
 
 CREATE TABLE IF NOT EXISTS "Administrator"
 (
@@ -62,12 +62,13 @@ CREATE TABLE IF NOT EXISTS "Administrator"
         ON UPDATE CASCADE
         ON DELETE CASCADE
         NOT VALID
-)
+);
 
 CREATE TABLE IF NOT EXISTS "Course"
 (
     cid character varying(10) NOT NULL,
     tid character varying(10) NOT NULL,
+    uni_id character varying(10) NOT NULL,
     cname character varying(20) NOT NULL,
     category character varying(20) NOT NULL,
     credit integer NOT NULL,
@@ -77,7 +78,7 @@ CREATE TABLE IF NOT EXISTS "Course"
         REFERENCES "Teacher" (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE
-)
+);
 
 CREATE TABLE IF NOT EXISTS "SC"
 (
@@ -97,4 +98,4 @@ CREATE TABLE IF NOT EXISTS "SC"
         REFERENCES "Course" (cid, tid) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE
-)
+);
