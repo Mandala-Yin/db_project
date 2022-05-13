@@ -44,4 +44,4 @@ def course_check(sid):
     basic_info = fetch_basic_information(sid, 'student') # 基本信息，方便回到学生主页
     results_major = fetch_stu_course(sid)  # 主学位课程信息
     results_non_major = fetch_stu_course(sid, False)  # 双学位课程信息，注意results可能为空
-    return render_template('stu_course.html', major=results_major, non_major=results_non_major, basic_info=basic_info)
+    return render_template('stu_course.html', major=results_major, minor=results_non_major, basic_info=basic_info)

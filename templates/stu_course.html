@@ -10,10 +10,83 @@
 {% block content %}
 <div>
     <div class="page-heading" style="float: left;width: 90%;">
-        <h3>Hello! Student {{basic_info['name']}}!</h3>
+        <h3>{{basic_info['name']}}, here is your courses.</h3>
     </div>
     <div class="page-heading" style="float: left; width: 10%;">
-        <button class="btn btn-primary btn-block"><a href="{{ url_for('log_manage.logout') }}" class="btn btn-primary btn-block">Logout</a></button>
+        <button class="btn btn-primary btn-block"><a href="{{ url_for('log_manage.logout') }}"
+                class="btn btn-primary btn-block">Logout</a></button>
+    </div>
+</div>
+<div class="page-content">
+    <div class="col-12  ">
+        <div class="row">
+            <div class="card">
+                <div class="card-header">
+                    <h4 style="float: left; width: 85%;">Major</h4>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-lg">
+                        <thead>
+                            <tr>
+                                <th>Course ID</th>
+                                <th>Course Name</th>
+                                <th>Score</th>
+                                <th>Credit</th>
+                                <th>Semester</th>
+                                <th>Category</th>
+                                <th>Is W?</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for course in major[0] %}
+                            <tr>
+                                <td class="text-bold-500">{{ course.cid }}</td>
+                                <td class="text-bold-500">{{ course.cname }}</td>
+                                <td class="text-bold-500">{{ course.score }}</td>
+                                <td class="text-bold-500">{{ course.credit }}</td>
+                                <td class="text-bold-500">{{ course.semester }}</td>
+                                <td class="text-bold-500">{{ course.category }}</td>
+                                <td class="text-bold-500">{{ course.is_w }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <h4 style="float: left; width: 85%;">Minor</h4>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-lg">
+                        <thead>
+                            <tr>
+                                <th>Course ID</th>
+                                <th>Course Name</th>
+                                <th>Score</th>
+                                <th>Credit</th>
+                                <th>Semester</th>
+                                <th>Category</th>
+                                <th>Is W?</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for course in minor[0] %}
+                            <tr>
+                                <td class="text-bold-500">{{ course.cid }}</td>
+                                <td class="text-bold-500">{{ course.cname }}</td>
+                                <td class="text-bold-500">{{ course.score }}</td>
+                                <td class="text-bold-500">{{ course.credit }}</td>
+                                <td class="text-bold-500">{{ course.semester }}</td>
+                                <td class="text-bold-500">{{ course.category }}</td>
+                                <td class="text-bold-500">{{ course.is_w }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}
