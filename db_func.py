@@ -15,7 +15,8 @@ def get_db_connection():
     db = psycopg2.connect(host='127.0.0.1',
                           database='information_management_system',
                           user='postgres',
-                          password='')
+                          password='',
+                          port = '5433')
     return db
 
 

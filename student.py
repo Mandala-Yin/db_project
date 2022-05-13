@@ -41,6 +41,7 @@ def update_student():
 @bp.route('/course/<string:sid>')
 def course_check(sid):
     # 学生点击主页'课程审查'按钮后应该进入该函数
+    basic_info = fetch_basic_information(sid, 'student') # 基本信息，方便回到学生主页
     results_major = fetch_stu_course(sid)  # 主学位课程信息
     results_non_major = fetch_stu_course(sid, False)  # 双学位课程信息，注意results可能为空
-    return render_template('stu_course.html', major=results_major, non_major=results_non_major)
+    return render_template('stu_course.html', major=results_major, non_major=results_non_major, basic_info=basic_info)
