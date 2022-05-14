@@ -1,10 +1,63 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>teacher course check</title>
-</head>
-<body>
+{% set title = 'Teacher_Course' %}
+{% set filename = 'tea_course.html' %}
 
-</body>
-</html>
+{% extends 'layouts/tea_master.html' %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='vendors/iconly/bold.css') }}">
+{% endblock %}
+
+{% block content %}
+<div>
+    <div class="page-heading" style="float: left;width: 90%;">
+        <h3>Teacher {{basic_info['name']}}, here is your courses.</h3>
+    </div>
+    <div class="page-heading" style="float: left; width: 10%;">
+        <button class="btn btn-primary btn-block"><a href="{{ url_for('log_manage.logout') }}"
+                class="btn btn-primary btn-block">Logout</a></button>
+    </div>
+</div>
+<div class="page-content">
+    <div class="col-12  ">
+        <div class="row">
+            <div class="card">
+                <div class="card-header">
+                    <h4 style="float: left; width: 85%;">Courses</h4>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-lg">
+                        <thead>
+                            <tr>
+                                <th>Course ID</th>
+                                <th>Course Name</th>
+                                <th>Category</th>
+                                <th>Credit</th>
+                                <th>Semester</th>
+                                <th>Average Score</th>
+                                <th>Max Score</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for course in courses %}
+                            <tr>
+                                <td class="text-bold-500">{{ course.cid }}</td>
+                                <td class="text-bold-500">{{ course.cname }}</td>
+                                <td class="text-bold-500">{{ course.category }}</td>
+                                <td class="text-bold-500">{{ course.credit }}</td>
+                                <td class="text-bold-500">{{ course.semester }}</td>
+                                <td class="text-bold-500">{{ course.avg_score }}</td>
+                                <td class="text-bold-500">{{ course.max_score }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block js %}
+<script src="{{ url_for('static', filename='vendors/apexcharts/apexcharts.js') }}"></script>
+<script src="{{ url_for('static', filename='js/pages/dashboard.js') }}"></script>
+{% endblock %}

@@ -41,8 +41,9 @@ def update_teacher():
 @bp.route('/course/<string:tid>')
 def course_info(tid):
     # 点击查看开设课程按钮后进入该函数
+    basic_info = fetch_basic_information(tid, 'teacher')
     results_course = fetch_tea_course(tid)
-    return render_template('tea_course.html', course=results_course)
+    return render_template('tea_course.html', courses=results_course, basic_info=basic_info)
 
 
 @bp.route('/add_scores/<string:tid>', methods=['POST'])
@@ -58,7 +59,7 @@ def add_scores_view(tid):
     if _cid and _semester:
         # 预查询相关信息，然后转入html页面
         results = fetch_course_without_score(_cid, tid, _semester)
-        return render_template('add_scores.html', tid=tid, cid=_cid, sem=_semester, res=results)
+        return render_template('tea_add_scores.html', tid=tid, cid=_cid, sem=_semester, res=results)
     else:
         return redirect(url_for('teacher.teacher', tid=tid))
 
@@ -75,7 +76,7 @@ def modify_scores_view(tid, cid=None, semester=None):
         if _cid and _semester:
             # 预查询相关信息，然后转入html页面
             results = fetch_course_with_score(_cid, tid, _semester)
-            return render_template('modify_scores.html', tid=tid, cid=_cid, sem=_semester, res=results)
+            return render_template('tea_modify_scores.html', tid=tid, cid=_cid, sem=_semester, res=results)
         else:
             return redirect(url_for('teacher.teacher', tid=tid))
     else:

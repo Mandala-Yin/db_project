@@ -1,0 +1,89 @@
+{% set title = 'Student_Edit' %}
+{% set filename = 'stu_edit.html' %}
+
+{% extends 'layouts/stu_master.html' %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='vendors/iconly/bold.css') }}">
+{% endblock %}
+
+{% block content %}
+<div>
+    <div class="page-heading" style="float: left;width: 90%;">
+        <h3>{{basic_info['name']}}, you can edit your imformation here!</h3>
+    </div>
+    <div class="page-heading" style="float: left; width: 10%;">
+        <button class="btn btn-primary btn-block"><a href="{{ url_for('log_manage.logout') }}"
+                class="btn btn-primary btn-block">Logout</a></button>
+    </div>
+</div>
+<div class="page-content">
+    <div class="col-12  ">
+        <div class="row">
+            <div class="card">
+                <div class="card-header">
+                    <h4 style="float: left; width: 85%;">Basic Information</h4>
+                </div>
+                <form method="post" action="{{ url_for('student.update_student', sid = basic_info['id']) }}">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="alert alert-light">
+                                    <h4 class="alert-heading">ID</h4>
+                                    <input type="text" name="id" class="form-control form-control-xl" readonly="true"
+                                        value="{{ basic_info['id'] }}">
+                                </div>
+                                <div class="alert alert-light">
+                                    <h4 class="alert-heading">NAME</h4>
+                                    <input type="text" name="name" class="form-control form-control-xl" readonly="true"
+                                        value="{{ basic_info['name'] }}">
+                                </div>
+                                <div class="alert alert-light">
+                                    <h4 class="alert-heading">SEX</h4>
+                                    <input type="text" name="sex" class="form-control form-control-xl" readonly="true"
+                                        value="{{ basic_info['sex'] }}">
+                                </div>
+                                <div class="alert alert-light">
+                                    <h4 class="alert-heading">FACULTY</h4>
+                                    <input type="text" name="faculty" class="form-control form-control-xl"
+                                        readonly="true" value="{{ basic_info['faculty'] }}">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="alert alert-light">
+                                    <h4 class="alert-heading">TELEPHONE</h4>
+                                    <input type="text" name="telephone" class="form-control form-control-xl"
+                                        value="{{ basic_info['telephone'] }}">
+                                </div>
+                                <div class="alert alert-light">
+                                    <h4 class="alert-heading">ADDRESS</h4>
+                                    <input type="text" name="address" class="form-control form-control-xl"
+                                        value="{{ basic_info['address'] }}">
+                                </div>
+                                <div class="alert alert-light">
+                                    <h4 class="alert-heading">GRADE</h4>
+                                    <input type="text" name="grade" class="form-control form-control-xl" readonly="true"
+                                        value="{{ basic_info['grade'] }}">
+                                </div>
+                                <div class="alert alert-light">
+                                    <h4 class="alert-heading">IS_FOREIGN_STUDENT</h4>
+                                    <input type="text" name="is_foreign_stu" class="form-control form-control-xl"
+                                        readonly="true" value="{{ basic_info['is_foreign_stu'] }}">
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-12">
+                                <br></br>
+                                <button class="btn btn-primary btn-lg btn-block">Update</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block js %}
+<script src="{{ url_for('static', filename='vendors/apexcharts/apexcharts.js') }}"></script>
+<script src="{{ url_for('static', filename='js/pages/dashboard.js') }}"></script>
+{% endblock %}
