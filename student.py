@@ -8,8 +8,8 @@ bp = Blueprint('student', __name__, url_prefix='/student')
 def student(sid):
     basic_info = fetch_basic_information(sid, 'student')
     if session.get('user_id') is not None:
-        # 正常情况下，应该进入展示学生基本信息的页面student.html
-        return render_template('student.html', basic_info=basic_info)
+        # 正常情况下，应该进入展示学生基本信息的页面student_info.html
+        return render_template('student_info.html', basic_info=basic_info)
     else:
         return redirect(url_for('log_manage.login'))
 
@@ -18,7 +18,7 @@ def student(sid):
 def student_edit(sid):
     # 通过主页中的修改按钮可以进入该函数
     basic_info = fetch_basic_information(sid, 'student')  # 传基本信息的原因是，可以在修改页面预填充原信息，然后可以仅修改某几项信息
-    return render_template('edit_stu.html', basic_info=basic_info)
+    return render_template('stu_edit.html', basic_info=basic_info)
 
 
 @bp.route('/update', methods=['POST'])

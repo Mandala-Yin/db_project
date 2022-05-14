@@ -9,8 +9,8 @@ bp = Blueprint('teacher', __name__, url_prefix='/teacher')
 def teacher(tid):
     basic_info = fetch_basic_information(tid, 'teacher')
     if session.get('user_id') is not None:
-        # 正常的话，应该进入展示教师基本信息的页面teacher.html
-        return render_template('teacher.html', basic_info=basic_info)
+        # 正常的话，应该进入展示教师基本信息的页面teacher_info.html
+        return render_template('teacher_info.html', basic_info=basic_info)
     else:
         return redirect(url_for('log_manage.login'))
 
@@ -19,7 +19,7 @@ def teacher(tid):
 def teacher_edit(tid):
     # 通过主页中的修改按钮可以进入该函数
     basic_info = fetch_basic_information(tid, 'teacher')  # 传基本信息的原因是，可以在修改页面预填充原信息，然后可以仅修改某几项信息
-    return render_template('edit_tea.html', basic_info=basic_info)
+    return render_template('tea_edit.html', basic_info=basic_info)
 
 
 @bp.route('/update', methods=['POST'])
