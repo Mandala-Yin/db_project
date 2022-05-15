@@ -1,10 +1,71 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>teacher course check</title>
-</head>
-<body>
+{% set title = 'Teacher_Course' %}
+{% set filename = 'tea_course.html' %}
 
-</body>
-</html>
+{% extends 'teacher/tea_master.html' %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='vendors/iconly/bold.css') }}">
+{% endblock %}
+
+{% block content %}
+<div>
+    <div class="page-heading" style="float: left;width: 90%;">
+        <h3>Teacher {{basic_info['name']}}, here are students of course {{cid}} in {{sem}}.</h3>
+    </div>
+    <div class="page-heading" style="float: left; width: 10%;">
+        <button class="btn btn-primary btn-block"><a href="{{ url_for('log_manage.logout') }}"
+                class="btn btn-primary btn-block">Logout</a></button>
+    </div>
+</div>
+<div class="page-content">
+    <div class="col-12  ">
+        <div class="row">
+            <div class="card">
+                <div class="card-header">
+                    <h4 style="float: left; width: 85%;">Scores</h4>
+                </div>
+                <form method="post"
+                    action="{{ url_for('teacher.modify_scores_confirm', tid = basic_info['id'], cid = cid) }}">
+                    <div class="table-responsive">
+                        <table class="table table-lg">
+                            <thead>
+                                <tr>
+                                    <th>Student ID</th>
+                                    <th>Student Name</th>
+                                    <th>Score</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for result in res %}
+                                <tr>
+                                    <td>
+                                        <input type="text" name="sids" class="form-control form-control-xl"
+                                            readonly="true" value="{{ result.sid }}">
+                                    </td>
+                                    <td>
+                                        <input type="text" class="form-control form-control-xl" readonly="true"
+                                            value="{{ result.s_name }}">
+                                    </td>
+                                    <td>
+                                        <input type="text" name="scores" class="form-control form-control-xl"
+                                            value="{{ result.score }}">
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-md-3 col-12">
+                        <br></br>
+                        <button class="btn btn-primary btn-lg btn-block">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block js %}
+<script src="{{ url_for('static', filename='vendors/apexcharts/apexcharts.js') }}"></script>
+<script src="{{ url_for('static', filename='js/pages/dashboard.js') }}"></script>
+{% endblock %}
