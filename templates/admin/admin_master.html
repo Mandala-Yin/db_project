@@ -42,11 +42,28 @@
                                 <span>EDIT INFO</span>
                             </a>
                         </li></br>
-                        <li class="sidebar-item {{ 'active' }}">
+                        <li class="sidebar-item has-sub {{ 'active' }}">
                             <a href="{{ url_for('admin.faculty_info', aid=basic_info['id']) }}" class='sidebar-link'>
                                 <i class="bi bi-emoji-smile"></i>
                                 <span>FACULTY INFO</span>
                             </a>
+                            <ul class="submenu ">
+                                <li class="submenu-item {{ 'active' }}">
+                                    <a href="{{ url_for('admin.faculty_info', aid=basic_info['id']) }}">
+                                        ALL
+                                    </a>
+                                </li>
+                                <li class="submenu-item {{ 'active' }}">
+                                    <a href="{{ url_for('admin.teacher_info', aid=basic_info['id']) }}">
+                                        teachers
+                                    </a>
+                                </li>
+                                <li class="submenu-item {{ 'active' }}">
+                                    <a href="{{ url_for('admin.student_info', aid=basic_info['id']) }}">
+                                        students
+                                    </a>
+                                </li>
+                            </ul>
                         </li></br>
                         <li class="sidebar-item {{ 'active' }}">
                             <a href="{{ url_for('admin.add_course_view', aid=basic_info['id']) }}" class='sidebar-link'>

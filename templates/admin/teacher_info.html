@@ -1,7 +1,7 @@
-{% set title = 'Teacher_Course' %}
-{% set filename = 'tea_course.html' %}
+{% set title = 'Teacher_Info' %}
+{% set filename = 'teacher_info.html' %}
 
-{% extends 'teacher/tea_master.html' %}
+{% extends 'admin/admin_master.html' %}
 
 {% block styles %}
 <link rel="stylesheet" href="{{ url_for('static', filename='vendors/iconly/bold.css') }}">
@@ -10,7 +10,7 @@
 {% block content %}
 <div>
     <div class="page-heading" style="float: left;width: 90%;">
-        <h3>Teacher {{basic_info['name']}}, here are your courses.</h3>
+        <h3>Administrator {{basic_info['name']}}, here is the teacher information.</h3>
     </div>
     <div class="page-heading" style="float: left; width: 10%;">
         <button class="btn btn-primary btn-block"><a href="{{ url_for('log_manage.logout') }}"
@@ -22,31 +22,31 @@
         <div class="row">
             <div class="card">
                 <div class="card-header">
-                    <h4 style="float: left; width: 85%;">Courses</h4>
+                    <h4 style="float: left; width: 85%;">Teacher Info</h4>
                 </div>
                 <div class="table-responsive">
                     <table class="table table-lg">
                         <thead>
                             <tr>
-                                <th>Course ID</th>
-                                <th>Course Name</th>
-                                <th>Category</th>
-                                <th>Credit</th>
-                                <th>Semester</th>
-                                <th>Average Score</th>
-                                <th>Max Score</th>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Sex</th>
+                                <th>Telephone</th>
+                                <th>Address</th>
+                                <th>Working Year</th>
+                                <th>Title</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {% for course in courses %}
+                            {% for tea in teachers %}
                             <tr>
-                                <td class="text-bold-500">{{ course.cid }}</td>
-                                <td class="text-bold-500">{{ course.cname }}</td>
-                                <td class="text-bold-500">{{ course.category }}</td>
-                                <td class="text-bold-500">{{ course.credit }}</td>
-                                <td class="text-bold-500">{{ course.semester }}</td>
-                                <td class="text-bold-500">{{ course.avg_score }}</td>
-                                <td class="text-bold-500">{{ course.max_score }}</td>
+                                <td class="text-bold-500">{{ tea.id }}</td>
+                                <td class="text-bold-500">{{ tea.name }}</td>
+                                <td class="text-bold-500">{{ tea.sex }}</td>
+                                <td class="text-bold-500">{{ tea.telephone }}</td>
+                                <td class="text-bold-500">{{ tea.address }}</td>
+                                <td class="text-bold-500">{{ tea.working_year }}</td>
+                                <td class="text-bold-500">{{ tea.title }}</td>
                             </tr>
                             {% endfor %}
                         </tbody>

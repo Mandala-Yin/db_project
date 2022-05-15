@@ -270,6 +270,27 @@ def get_tid(fid):
 
     return res_tid
 
+# 根据院系号，查询教师
+def get_teachers_by_fid(fid):
+    db = get_db_connection()
+    cur = db.cursor()
+    cur.execute(f'SELECT id, name, sex, fname, telephone, address, working_year, title '
+            f'FROM "teacher_information" '
+            f'WHERE "teacher_information".fid=\'{fid}\'')
+    res = format_trans(cur.fetchall(), default_map + tea_extra)
+    close_db_connection(cur, db)
+    return res
+
+# 根据院系号，查询学生
+def get_students_by_fid(fid):
+    db = get_db_connection()
+    cur = db.cursor()
+    cur.execute(f'SELECT id, name, sex, fname, telephone, address, grade, is_foreign_stu '
+                    f'FROM "student_information" '
+                    f'WHERE "student_information".fid=\'{fid}\'')
+    res = format_trans(cur.fetchall(), default_map + stu_extra)
+    close_db_connection(cur, db)
+    return res
 
 # 添加新课程
 def update_course(cid, tid, cname, category, credit):
