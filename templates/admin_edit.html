@@ -24,6 +24,21 @@
                 <div class="card-header">
                     <h4 style="float: left; width: 85%;">Basic Information</h4>
                 </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            {% with messages = get_flashed_messages() %}
+                                {% if messages %}
+                                    {% for message in messages %}
+                                        <div class="alert alert-light-success color-success">
+                                            <i class="bi bi-check-circle"></i>{{ message }}
+                                        </div>
+                                    {% endfor %}
+                                {% endif %}
+                            {% endwith %}
+                        </div>
+                    </div>
+                </div>
                 <form method="post" action="{{ url_for('admin.update_admin', tid = basic_info['id']) }}">
                     <div class="card-body">
                         <div class="row">

@@ -1,6 +1,7 @@
 import psycopg2
 
 default_map = ['id', 'name', 'sex', 'faculty', 'telephone', 'address']
+sex_dict = {True: 'Male', False: 'Female'}
 login_map = ['id', 'password', 'role']
 adm_extra = ['working_year', 'is_cadre']
 tea_extra = ['working_year', 'title']
@@ -13,10 +14,9 @@ TC_info = ['cid', 'cname', 'category', 'credit', 'semester', 'avg_score', 'max_s
 # 建立数据库连接
 def get_db_connection():
     db = psycopg2.connect(host='127.0.0.1',
-                          database='information_management_system',
+                          database='Information_Management_System',
                           user='postgres',
-                          password='',
-                          port = '5433')
+                          password='')
     return db
 
 
@@ -34,6 +34,8 @@ def format_trans(raw_res, mapping=default_map):
     for row in raw_res:
         row, trans_row = list(row), {}
         for col, val in zip(mapping, row):
+            if col == 'sex':
+                val = sex_dict[val]
             trans_row[col] = val
         trans_res.append(trans_row)
 
@@ -46,6 +48,8 @@ def format_trans_one(raw_res, mapping=default_map):
         return {}
     row, trans_row = list(raw_res), {}
     for col, val in zip(mapping, row):
+        if col == 'sex':
+            val = sex_dict[val]
         trans_row[col] = val
 
     return trans_row

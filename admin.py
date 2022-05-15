@@ -32,8 +32,8 @@ def update_admin():
     if _id and _telephone and _address and request.method == 'POST':
         # save edits, only consider telephone and address
         update_user_info(_id, _telephone, _address)
-        flash('admin information updated successfully!')
-        return redirect(url_for('admin.admin', aid=_id))
+        flash(' Admin information updated successfully!')
+        return redirect(url_for('admin.admin_edit', aid=_id))
     else:
         return 'Error while updating admin information'
 

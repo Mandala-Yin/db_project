@@ -31,9 +31,9 @@ def update_student():
     if _id and _telephone and _address and request.method == 'POST':
         # save edits, only consider telephone and address
         update_user_info(_id, _telephone, _address)
-        flash('student information updated successfully!')
+        flash(' Student information updated successfully!')
         # 修改完信息后，应该跳转回主页面
-        return redirect(url_for('student.student', sid=_id))
+        return redirect(url_for('student.student_edit', sid=_id))
     else:
         return 'Error while updating student information'
 
