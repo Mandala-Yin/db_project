@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
+{% set title = 'Teacher_Master' %}
+{% set filename = 'tea_master.html' %}
 
 <head>
     <meta charset="UTF-8">
@@ -49,13 +49,15 @@
                             </a>
                         </li></br>
                         <li class="sidebar-item {{ 'active' }}">
-                            <a href="{{ url_for('teacher.add_scores_view', tid=basic_info['id']) }}" class='sidebar-link'>
+                            <a href="{{ url_for('teacher.choose_course_for_add', tid=basic_info['id'])}}"
+                                class='sidebar-link'>
                                 <i class="bi bi-emoji-smile"></i>
                                 <span>ADD SCORES</span>
                             </a>
                         </li></br>
                         <li class="sidebar-item {{ 'active' }}">
-                            <a href="{{ url_for('teacher.modify_scores_view', tid=basic_info['id']) }}" class='sidebar-link'>
+                            <a href="{{ url_for('teacher.choose_course_for_modify', tid=basic_info['id']) }}"
+                                class='sidebar-link'>
                                 <i class="bi bi-emoji-smile"></i>
                                 <span>MODIFY SCORES</span>
                             </a>
