@@ -32,8 +32,8 @@ def update_teacher():
     if _id and _telephone and _address and request.method == 'POST':
         # save edits, only consider telephone and address
         update_user_info(_id, _telephone, _address)
-        flash('teacher information updated successfully!')
-        return redirect(url_for('teacher.teacher', tid=_id))
+        flash(' Teacher information updated successfully!')
+        return redirect(url_for('teacher.teacher_edit', tid=_id))
     else:
         return 'Error while updating teacher information'
 
@@ -44,6 +44,7 @@ def course_info(tid):
     basic_info = fetch_basic_information(tid, 'teacher')
     results_course = fetch_tea_course(tid)
     return render_template('teacher/tea_course.html', courses=results_course, basic_info=basic_info)
+
 
 @bp.route('/choose_course/<string:tid>')
 def choose_course(tid):
@@ -65,6 +66,7 @@ def modify_scores_view(tid):
         return render_template('teacher/tea_modify_scores.html', basic_info=basic_info, cid=_cid, sem=_semester, res=results)
     else:
         return redirect(url_for('teacher.teacher', tid=tid))
+
 
 '''
 # 第一种路由来自教师主页点击修改课程分数信息按钮，第二种路由来自修改分数后
@@ -90,6 +92,7 @@ def modify_scores_view(tid, cid=None, semester=None):
             return redirect(url_for('teacher.teacher', tid=tid))
 '''
 
+
 @bp.route('/modify_scores_confirm/<string:tid>/<string:cid>', methods=['POST'])
 def modify_scores_confirm(tid, cid):
     # 点击录入成绩页面的提交按钮进入该函数，这里假设页面表单设置为list类型，即sids, scores都是list的格式
@@ -98,6 +101,7 @@ def modify_scores_confirm(tid, cid):
     update_scores(sids, scores, cid)
     # 完全录入后回到教师主页
     return redirect(url_for('teacher.teacher', tid=tid))
+
 
 '''
 @bp.route('/modify_scores_confirm/<string:tid>/<string:cid>/<string:semester>', methods=['POST'])
