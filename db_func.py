@@ -16,10 +16,9 @@ TC_info = ['cid', 'cname', 'category', 'credit',
 # 建立数据库连接
 def get_db_connection():
     db = psycopg2.connect(host='127.0.0.1',
-                          database='information_management_system',
+                          database='Information_Management_System',
                           user='postgres',
-                          password='',
-                          port='5433')
+                          password='')
     return db
 
 
@@ -138,6 +137,18 @@ def fetch_stu_course(sid, is_major=True):
     close_db_connection(cur, db)
 
     return results_full, results_category
+
+
+# 获取去重的课程号
+def fetch_cid(tid):
+    sql = f'SELECT "Course".cid UNIQUE FROM "Course" WHERE "Course".tid=\'{tid}\''
+    db = get_db_connection()
+    cur = db.cursor()
+    cur.execute(sql)
+    results = format_trans(cur.fetchall(), ['cid'])
+    close_db_connection(cur, db)
+
+    return results
 
 
 # 获取教师授课信息
@@ -280,6 +291,7 @@ def get_tid(fid):
 
     return res_tid
 
+
 # 根据院系号，查询教师
 def get_teachers_by_fid(fid):
     db = get_db_connection()
@@ -291,6 +303,7 @@ def get_teachers_by_fid(fid):
     close_db_connection(cur, db)
     return res
 
+
 # 根据院系号，查询学生
 def get_students_by_fid(fid):
     db = get_db_connection()
@@ -301,6 +314,7 @@ def get_students_by_fid(fid):
     res = format_trans(cur.fetchall(), default_map + stu_extra)
     close_db_connection(cur, db)
     return res
+
 
 # 添加新课程
 def update_course(cid, tid, cname, category, credit):

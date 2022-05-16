@@ -1,9 +1,10 @@
 from operator import mod
 from flask import Blueprint, redirect, render_template, request, session, url_for, flash
 from db_func import fetch_basic_information, update_user_info, fetch_tea_course, \
-    fetch_course_with_score, fetch_course_without_score, update_scores
+    fetch_course_with_score, fetch_course_without_score, update_scores, fetch_cid
 
 bp = Blueprint('teacher', __name__, url_prefix='/teacher')
+
 
 @bp.route('/<string:tid>', methods=['GET', 'POST'])
 def teacher(tid):
@@ -49,7 +50,7 @@ def course_info(tid):
 @bp.route('/choose_course/<string:tid>')
 def choose_course(tid):
     basic_info = fetch_basic_information(tid, 'teacher')
-    results_course = fetch_tea_course(tid)
+    results_course = fetch_cid(tid)
     # 点击添加分数/修改分数按钮后进入该函数
     return render_template('teacher/input_course_info.html', courses=results_course, basic_info=basic_info)
 
