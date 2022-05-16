@@ -6,17 +6,20 @@ login_map = ['id', 'password', 'role']
 adm_extra = ['working_year', 'is_cadre']
 tea_extra = ['working_year', 'title']
 stu_extra = ['grade', 'is_foreign_stu']
-SC_info = ['cid', 'score', 'is_major', 'is_w', 'semester', 'cname', 'category', 'credit']
+SC_info = ['cid', 'score', 'is_major', 'is_w',
+           'semester', 'cname', 'category', 'credit']
 category_info = ['category', 'credit', 'avg_score', 'avg_gpa']
-TC_info = ['cid', 'cname', 'category', 'credit', 'semester', 'avg_score', 'max_score']
+TC_info = ['cid', 'cname', 'category', 'credit',
+           'semester', 'avg_score', 'max_score']
 
 
 # 建立数据库连接
 def get_db_connection():
     db = psycopg2.connect(host='127.0.0.1',
-                          database='Information_Management_System',
+                          database='information_management_system',
                           user='postgres',
-                          password='')
+                          password='',
+                          port='5433')
     return db
 
 
@@ -242,7 +245,7 @@ def faculty2tea(fid):
     sql = f'SELECT title, COUNT(*) FROM teacher_information WHERE fid=\'{fid}\' ' \
           f'GROUP BY title'
     cur.execute(sql)
-    res_title = format_trans(cur.fetchall(), ['tile', 'tea nums'])
+    res_title = format_trans(cur.fetchall(), ['title', 'tea nums'])
     close_db_connection(cur, db)
 
     return res_sex, res_title
@@ -279,8 +282,8 @@ def get_teachers_by_fid(fid):
     db = get_db_connection()
     cur = db.cursor()
     cur.execute(f'SELECT id, name, sex, fname, telephone, address, working_year, title '
-            f'FROM "teacher_information" '
-            f'WHERE "teacher_information".fid=\'{fid}\'')
+                f'FROM "teacher_information" '
+                f'WHERE "teacher_information".fid=\'{fid}\'')
     res = format_trans(cur.fetchall(), default_map + tea_extra)
     close_db_connection(cur, db)
     return res
@@ -290,8 +293,8 @@ def get_students_by_fid(fid):
     db = get_db_connection()
     cur = db.cursor()
     cur.execute(f'SELECT id, name, sex, fname, telephone, address, grade, is_foreign_stu '
-                    f'FROM "student_information" '
-                    f'WHERE "student_information".fid=\'{fid}\'')
+                f'FROM "student_information" '
+                f'WHERE "student_information".fid=\'{fid}\'')
     res = format_trans(cur.fetchall(), default_map + stu_extra)
     close_db_connection(cur, db)
     return res

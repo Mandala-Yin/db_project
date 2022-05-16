@@ -24,15 +24,141 @@
                 <div class="card-header">
                     <h4 style="float: left; width: 85%;">Teachers</h4>
                 </div>
+                <div class="card-body">
+                    <br></br>
+                    <div class="table-responsive">
+                        <h6 style="float: left; width: 85%;">by Sex</h6>
+                        <table class="table table-lg">
+                            <thead>
+                                <tr>
+                                    {% for tea in tea_info[0] %}
+                                    <th>{{ tea['sex'] }}</th>
+                                    {% endfor %}
+                                    <th>Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    {% for tea in tea_info[0] %}
+                                    <td class="text-bold-500">{{ tea['tea nums'] }}</td>
+                                    {% endfor %}
+                                    <td class="text-bold-500">
+                                        {{ tea_info[0] | sum(attribute='tea nums') }}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <br></br>
+                    <div class="table-responsive">
+                        <h6 style="float: left; width: 85%;">by Title</h6>
+                        <table class="table table-lg">
+                            <thead>
+                                <tr>
+                                    {% for tea in tea_info[1] %}
+                                    <th>{{ tea['title'] }}</th>
+                                    {% endfor %}
+                                    <th>Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    {% for tea in tea_info[1] %}
+                                    <td class="text-bold-500">{{ tea['tea nums'] }}</td>
+                                    {% endfor %}
+                                    <td class="text-bold-500">
+                                        {{ tea_info[1] | sum(attribute='tea nums') }}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
             <div class="card">
                 <div class="card-header">
                     <h4 style="float: left; width: 85%;">Students</h4>
                 </div>
+                <div class="card-body">
+                    <br></br>
+                    <div class="table-responsive">
+                        <h6 style="float: left; width: 85%;">by Sex</h6>
+                        <table class="table table-lg">
+                            <thead>
+                                <tr>
+                                    {% for stu in stu_info[0] %}
+                                    <th>{{ stu['sex'] }}</th>
+                                    {% endfor %}
+                                    <th>Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    {% for stu in stu_info[0] %}
+                                    <td class="text-bold-500">{{ stu['stu nums'] }}</td>
+                                    {% endfor %}
+                                    <td class="text-bold-500">
+                                        {{ stu_info[0] | sum(attribute='stu nums') }}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <br></br>
+                    <div class="table-responsive">
+                        <h6 style="float: left; width: 85%;">by Grade</h6>
+                        <table class="table table-lg">
+                            <thead>
+                                <tr>
+                                    {% for stu in stu_info[1] %}
+                                    <th>{{ stu['grade'] }}</th>
+                                    {% endfor %}
+                                    <th>Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    {% for stu in stu_info[1] %}
+                                    <td class="text-bold-500">{{ stu['stu nums'] }}</td>
+                                    {% endfor %}
+                                    <td class="text-bold-500">
+                                        {{ stu_info[1] | sum(attribute='stu nums') }}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
             <div class="card">
                 <div class="card-header">
                     <h4 style="float: left; width: 85%;">Courses</h4>
+                </div>
+                <div class="card-body">
+                    <br></br>
+                    <div class="table-responsive">
+                        <h6 style="float: left; width: 85%;">by Category</h6>
+                        <table class="table table-lg">
+                            <thead>
+                                <tr>
+                                    {% for course in course_info %}
+                                    <th>{{ course['category'] }}</th>
+                                    {% endfor %}
+                                    <th>Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    {% for course in course_info %}
+                                    <td class="text-bold-500">{{ course['course nums'] }}</td>
+                                    {% endfor %}
+                                    <td class="text-bold-500">
+                                        {{ course_info | sum(attribute='course nums') }}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
