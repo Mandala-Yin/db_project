@@ -24,29 +24,65 @@
                 <div class="card-header">
                     <h4 style="float: left; width: 85%;">Major</h4>
                 </div>
-                <div class="table-responsive">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-lg">
+                            <thead>
+                                <tr>
+                                    <th>Course ID</th>
+                                    <th>Course Name</th>
+                                    <th>Category</th>
+                                    <th>Credit</th>
+                                    <th>Semester</th>
+                                    <th>Score</th>
+                                    <th>GPA</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for course in major[0] %}
+                                <tr>
+                                    <td class="text-bold-500">{{ course.cid }}</td>
+                                    <td class="text-bold-500">{{ course.cname }}</td>
+                                    <td class="text-bold-500">{{ course.category }}</td>
+                                    <td class="text-bold-500">{{ course.credit }}</td>
+                                    <td class="text-bold-500">{{ course.semester }}</td>
+                                    <td class="text-bold-500">
+                                        {% if course.is_w %}
+                                        W
+                                        {% else %}
+                                        {{ course.score }}
+                                        {% endif %}
+                                    </td>
+                                    <td class="text-bold-500">
+                                        {% if course.is_w %}
+                                        W
+                                        {% else %}
+                                        {{ course.is_major }}
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <br></br>
+                    <h6 style="float: left; width: 85%;">Statistics by Category</h6>
                     <table class="table table-lg">
                         <thead>
                             <tr>
-                                <th>Course ID</th>
-                                <th>Course Name</th>
-                                <th>Score</th>
-                                <th>Credit</th>
-                                <th>Semester</th>
                                 <th>Category</th>
-                                <th>Is W?</th>
+                                <th>Credit</th>
+                                <th>Average Score</th>
+                                <th>Average GPA</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {% for course in major[0] %}
+                            {% for category in major[1] %}
                             <tr>
-                                <td class="text-bold-500">{{ course.cid }}</td>
-                                <td class="text-bold-500">{{ course.cname }}</td>
-                                <td class="text-bold-500">{{ course.score }}</td>
-                                <td class="text-bold-500">{{ course.credit }}</td>
-                                <td class="text-bold-500">{{ course.semester }}</td>
-                                <td class="text-bold-500">{{ course.category }}</td>
-                                <td class="text-bold-500">{{ course.is_w }}</td>
+                                <td class="text-bold-500">{{ category.category }}</td>
+                                <td class="text-bold-500">{{ category.credit }}</td>
+                                <td class="text-bold-500">{{ category.avg_score }}</td>
+                                <td class="text-bold-500">{{ category.avg_gpa }}</td>
                             </tr>
                             {% endfor %}
                         </tbody>
@@ -57,29 +93,66 @@
                 <div class="card-header">
                     <h4 style="float: left; width: 85%;">Minor</h4>
                 </div>
-                <div class="table-responsive">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-lg">
+                            <thead>
+                                <tr>
+                                    <th>Course ID</th>
+                                    <th>Course Name</th>
+                                    <th>Category</th>
+                                    <th>Credit</th>
+                                    <th>Semester</th>
+                                    <th>Score</th>
+                                    <th>GPA</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for course in minor[0] %}
+                                <tr>
+                                    <td class="text-bold-500">{{ course.cid }}</td>
+                                    <td class="text-bold-500">{{ course.cname }}</td>
+                                    <td class="text-bold-500">{{ course.category }}</td>
+                                    <td class="text-bold-500">{{ course.credit }}</td>
+                                    <td class="text-bold-500">{{ course.semester }}</td>
+                                    <td class="text-bold-500">
+                                        {% if course.is_w %}
+                                        W
+                                        {% endif %}
+                                        {% if course.is_w == False %}
+                                        {{ course.score }}
+                                        {% endif %}
+                                    </td>
+                                    <td class="text-bold-500">
+                                        {% if course.is_w %}
+                                        W
+                                        {% else %}
+                                        {{ course.is_major }}
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <br></br>
+                    <h6 style="float: left; width: 85%;">Statistics by Category</h6>
                     <table class="table table-lg">
                         <thead>
                             <tr>
-                                <th>Course ID</th>
-                                <th>Course Name</th>
-                                <th>Score</th>
-                                <th>Credit</th>
-                                <th>Semester</th>
                                 <th>Category</th>
-                                <th>Is W?</th>
+                                <th>Credit</th>
+                                <th>Average Score</th>
+                                <th>Average GPA</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {% for course in minor[0] %}
+                            {% for category in minor[1] %}
                             <tr>
-                                <td class="text-bold-500">{{ course.cid }}</td>
-                                <td class="text-bold-500">{{ course.cname }}</td>
-                                <td class="text-bold-500">{{ course.score }}</td>
-                                <td class="text-bold-500">{{ course.credit }}</td>
-                                <td class="text-bold-500">{{ course.semester }}</td>
-                                <td class="text-bold-500">{{ course.category }}</td>
-                                <td class="text-bold-500">{{ course.is_w }}</td>
+                                <td class="text-bold-500">{{ category.category }}</td>
+                                <td class="text-bold-500">{{ category.credit }}</td>
+                                <td class="text-bold-500">{{ category.avg_score }}</td>
+                                <td class="text-bold-500">{{ category.avg_gpa }}</td>
                             </tr>
                             {% endfor %}
                         </tbody>
