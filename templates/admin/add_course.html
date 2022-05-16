@@ -1,11 +1,82 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>INDEX</title>
-</head>
-<body>
-Test succeed!
-admin add course
-</body>
-</html>
+{% set title = 'Add_Course' %}
+{% set filename = 'add_course.html' %}
+
+{% extends 'admin/admin_master.html' %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='vendors/iconly/bold.css') }}">
+{% endblock %}
+
+{% block content %}
+<div>
+    <div class="page-heading" style="float: left;width: 90%;">
+        <h3>Administrator {{basic_info['name']}}, you can add a course here.</h3>
+    </div>
+    <div class="page-heading" style="float: left; width: 10%;">
+        <button class="btn btn-primary btn-block"><a href="{{ url_for('log_manage.logout') }}"
+                class="btn btn-primary btn-block">Logout</a></button>
+    </div>
+</div>
+<div class="page-content">
+    <div class="col-12  ">
+        <div class="row">
+            <div class="card">
+                <div class="card-header">
+                    <h4 style="float: left; width: 85%;">Course Information</h4>
+                </div>
+                <form method="post" action="{{ url_for('admin.add_course_confirm', aid = basic_info['id']) }}">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="alert alert-light">
+                                    <h5 class="alert-heading">Course ID</h5>
+                                    <input type="text" name="cid" class="form-control form-control-xl"
+                                        placeholder="please input course id here">
+                                </div>
+                                <div class="alert alert-light">
+                                    <h5 class="alert-heading">Course Name</h5>
+                                    <input type="text" name="cname" class="form-control form-control-xl"
+                                        placeholder="please input course name here">
+                                </div>
+                                <div class="alert alert-light">
+                                    <h5 class="alert-heading">Teacher ID</h5>
+                                    <input type="text" name="tid" list="tid_list" class="form-control form-control-xl"
+                                        placeholder="please input teacher id here">
+                                    <datalist id="tid_list">
+                                        {% for tea in tea_info %}
+                                        <option>{{ tea['tid'] }}</option>
+                                        {% endfor %}
+                                    </datalist>
+                                </div>
+                                <div class="alert alert-light">
+                                    <h5 class="alert-heading">Category</h5>
+                                    <input type="text" name="category"  list="category_list" class="form-control form-control-xl"
+                                        placeholder="please input course category here">
+                                    <datalist id="category_list">
+                                        <option>Mandatory</option>
+                                        <option>Selective</option>
+                                    </datalist>
+                                </div>
+                                <div class="alert alert-light">
+                                    <h5 class="alert-heading">Credit</h5>
+                                    <input type="text" name="credit" class="form-control form-control-xl"
+                                        placeholder="please input course credit here">
+                                </div>
+                                <div class="col-md-3 col-12">
+                                    <br></br>
+                                    <button class="btn btn-primary btn-lg btn-block">Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block js %}
+<script src="{{ url_for('static', filename='vendors/apexcharts/apexcharts.js') }}"></script>
+<script src="{{ url_for('static', filename='js/pages/dashboard.js') }}"></script>
+{% endblock %}

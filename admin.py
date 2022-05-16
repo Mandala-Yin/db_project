@@ -69,11 +69,12 @@ def student_info(aid):
 
 @bp.route('/add_course/<string:aid>')
 def add_course_view(aid):
+    basic_info = fetch_basic_information(aid, 'admin')
     # 新加本院系开设的课程，点击添加课程按钮应该进入该函数
     fid = faculty_id(aid)['fid']
     # 预查询本院系教师信息，提供选择（html中tid一栏可以设为下拉单）
     candidate_tid = get_tid(fid)
-    return render_template('admin/add_course.html', fid=fid, tea_info=candidate_tid)
+    return render_template('admin/add_course.html', fid=fid, basic_info=basic_info, tea_info=candidate_tid)
 
 
 @bp.route('/add_course_confirm/<string:aid>', methods=['POST'])
