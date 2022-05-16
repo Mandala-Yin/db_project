@@ -6,7 +6,7 @@ login_map = ['id', 'password', 'role']
 adm_extra = ['working_year', 'is_cadre']
 tea_extra = ['working_year', 'title']
 stu_extra = ['grade', 'is_foreign_stu']
-SC_info = ['cid', 'score', 'is_major', 'is_w',
+SC_info = ['cid', 'score', 'gpa', 'is_w',
            'semester', 'cname', 'category', 'credit']
 category_info = ['category', 'credit', 'avg_score', 'avg_gpa']
 TC_info = ['cid', 'cname', 'category', 'credit',
@@ -144,11 +144,14 @@ def fetch_stu_course(sid, is_major=True):
 def fetch_tea_course(tid):
     # 按课程、学期统计平均分、最高分 建立了临时视图
     sql = f'WITH "S_ANY"(cid, semester, avg_score, max_score) AS ( ' \
-          f'SELECT cid, semester, AVG("SC".score)::float, MAX("SC".score) ' \
+          f'SELECT cid, semester, CAST(AVG("SC".score) as DECIMAL(5,2)), MAX("SC".score) ' \
           f'FROM "SC" WHERE "SC".tid=\'{tid}\' GROUP BY "SC".cid, "SC".semester) ' \
           f'SELECT "Course".cid, "Course".cname, "Course".category, "Course".credit, ' \
           f'"S_ANY".semester, "S_ANY".avg_score, "S_ANY".max_score ' \
-          f'FROM "Course", "S_ANY" WHERE "Course".cid="S_ANY".cid and "Course".tid=\'{tid}\''
+          f'FROM "Course", "S_ANY" WHERE "Course".cid="S_ANY".cid and "Course".tid=\'{tid}\' ' \
+          f'UNION ' \
+          f'SELECT "Course".cid, "Course".cname, "Course".category, "Course".credit, null, null, null ' \
+          f'FROM "Course" WHERE "Course".cid not in (SELECT cid FROM "SC") AND "Course".tid=\'{tid}\''
     db = get_db_connection()
     cur = db.cursor()
     cur.execute(sql)

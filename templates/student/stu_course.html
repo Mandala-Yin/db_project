@@ -10,7 +10,7 @@
 {% block content %}
 <div>
     <div class="page-heading" style="float: left;width: 90%;">
-        <h3>{{basic_info['name']}}, here is your courses.</h3>
+        <h3>{{basic_info['name']}}, here are your courses.</h3>
     </div>
     <div class="page-heading" style="float: left; width: 10%;">
         <button class="btn btn-primary btn-block"><a href="{{ url_for('log_manage.logout') }}"
@@ -53,13 +53,7 @@
                                         {{ course.score }}
                                         {% endif %}
                                     </td>
-                                    <td class="text-bold-500">
-                                        {% if course.is_w %}
-                                        W
-                                        {% else %}
-                                        {{ course.is_major }}
-                                        {% endif %}
-                                    </td>
+                                    <td class="text-bold-500">{{ course.gpa }}</td>
                                 </tr>
                                 {% endfor %}
                             </tbody>
@@ -123,13 +117,7 @@
                                         {{ course.score }}
                                         {% endif %}
                                     </td>
-                                    <td class="text-bold-500">
-                                        {% if course.is_w %}
-                                        W
-                                        {% else %}
-                                        {{ course.is_major }}
-                                        {% endif %}
-                                    </td>
+                                    <td class="text-bold-500">{{ course.gpa }}</td>
                                 </tr>
                                 {% endfor %}
                             </tbody>
