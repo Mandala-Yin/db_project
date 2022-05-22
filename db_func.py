@@ -241,13 +241,12 @@ def faculty2stu(fid):
     # 按性别统计人数
     sql = f'SELECT sex, COUNT(*) FROM student_information WHERE fid=%s ' \
           f'GROUP BY sex'
-    paras = [fid]
-    cur.execute(sql, paras)
+    cur.execute(sql, [fid])
     res_sex = format_trans(cur.fetchall(), ['sex', 'stu nums'])
     # 按年级统计人数
     sql = f'SELECT grade, COUNT(*) FROM student_information WHERE fid=%s ' \
           f'GROUP BY grade'
-    cur.execute(sql, paras)
+    cur.execute(sql, [fid])
     res_grade = format_trans(cur.fetchall(), ['grade', 'stu nums'])
     close_db_connection(cur, db)
 
