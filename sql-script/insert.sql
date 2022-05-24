@@ -119,7 +119,7 @@ insert into "SC"(
     union
     select '200208', 'c01', '030123', 88, TRUE, FALSE, 20210901
     union
-    select '200214', 'c01', '030123', 89, TRUE, TRUE, 202109101
+    select '200214', 'c01', '030123', NULL, TRUE, TRUE, 202109101
     union
     select '180215', 'c02', '030123', 82, FALSE, FALSE, 20210308
     union
